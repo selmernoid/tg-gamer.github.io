@@ -19,10 +19,12 @@
     <div id="content"></div>
     <script src="https://telegram.org/js/games.js"></script>
     <script>
-      document.getElementById('content').innerHTML =
-        JSON.stringify(TelegramGameProxy.initParams) +
-        ' + + + ' +
-        JSON.stringify(TelegramGameProxy);
+      setTimeout(() => {
+        document.getElementById('content').innerHTML =
+          JSON.stringify(TelegramGameProxy.initParams) +
+          ' + + + ' +
+          JSON.stringify(TelegramGameProxy);
+      }, 2000);
     </script>
   </body>
 </html>
