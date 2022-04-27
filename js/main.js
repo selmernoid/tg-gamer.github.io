@@ -45,11 +45,11 @@ var Flood = new Phaser.Class({
   {
       this.load.bitmapFont('atari', 'assets/atari-smooth.png', 'assets/atari-smooth.xml');
       this.load.atlas('flood', 'assets/blobs.png', 'assets/blobs.json');
-      document.getElementById('loading').style.visibility = 'hidden';
   },
 
   create: function ()
   {
+      this.scale.startFullscreen();
       this.add.image(400, 300, 'flood', 'background');
       this.gridBG = this.add.image(400, 600 + 300, 'flood', 'grid');
 
@@ -753,9 +753,10 @@ var Flood = new Phaser.Class({
 });
 
 var config = {
-  type: Phaser.WEBGL,
-  width: 800,
-  height: 600,
+  type: Phaser.CANVAS,
+  width: window.innerWidth,//800,
+  height: window.innerHeight,//600,
+  autoCenter: Phaser.Scale.CENTER_BOTH,
   pixelArt: true,
   parent: 'phaser-example',
   scene: [ Flood ]
