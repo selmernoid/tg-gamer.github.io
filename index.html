@@ -12,21 +12,14 @@
     <meta name="MobileOptimized" content="176" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="robots" content="noindex,nofollow" />
-
-    <link href="./css/main.css" rel="stylesheet" />
-
-    <script src="./js/phaser.min.js"></script>
-    <script src="./js/main.js"></script>
-    <!-- <script src="./js/getQueryString.js"></script>
-    <script src="./js/jquery-3.1.1.min.js"></script>
-    <script src="./js/TweenMax.min.js"></script> 
-    <script src="./js/labs.js"></script>  -->
-    <script src="https://telegram.org/js/games.js"></script>
-</head>
-
-<body>
-    <div id="phaser-example"></div>
-
-    <!-- <p id="loading">Please wait, loading Phaser build ...</p> -->
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+    <script type="module" src="/src/index.ts"></script>
+  </head>
+  <body>
+    <div id="game"></div>
   </body>
 </html>
