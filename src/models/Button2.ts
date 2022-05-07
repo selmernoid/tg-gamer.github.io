@@ -7,15 +7,16 @@ export class Button2 {
     x: number,
     y: number,
     private callback: (time: number) => void) {
+    const fillColor = 'purple';
     const button = scene.add.text(x, y, label)
       .setOrigin(0.5)
-      .setPadding(10)
-      .setStyle({ backgroundColor: '#111' })
+      .setPadding(20, 10)
+      .setStyle(<Partial<Phaser.Types.GameObjects.Text.TextStyle>>{ backgroundColor: '#1ef', fill: fillColor })
       .setInteractive({ useHandCursor: true })
       .on('pointerup', () => this.release())
       .on('pointerdown', () => this.press())
-      .on('pointerover', () => button.setStyle({ fill: '#f39c12' }))
-      .on('pointerout', () => button.setStyle({ fill: '#FFF' }));
+      .on('pointerover', () => button.setStyle({ fill: 'red' }))
+      .on('pointerout', () => button.setStyle({ fill: fillColor }));
   }
 
   press(): void {
