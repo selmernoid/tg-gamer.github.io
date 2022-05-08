@@ -1,15 +1,15 @@
 import Phaser from 'phaser';
 import { TimeToDiscrete } from '../common/utilities';
 import { Base } from '../models/Base';
-import { Button } from '../models/Button';
 import { MinusCharger, PlusCharger } from '../models/Charger';
 import { ChargeSphere } from '../models/ChargeSphere';
-import { HEIGHT, WIDTH, start } from '../common/constants';
+import { HEIGHT, start } from '../common/constants';
 import { Field } from '../models/Field';
 import { State } from '../models/State';
 import { StateNotification } from '../models/StateNotification';
 import { Button2 } from '../models/Button2';
 import { mergeWith } from 'rxjs';
+import { DynamicDebounce } from '../common/dynamicDebounce';
 
 
 export default class GameController extends Phaser.Scene {
@@ -49,9 +49,9 @@ export default class GameController extends Phaser.Scene {
     });
 
     this.field = new Field(this);
-    this.base = new Base(this);
     this.charge = new ChargeSphere(this);
-    this.stateNotification = new StateNotification(this, this.base);
+    this.base = new Base(this, this.charge);
+    this.stateNotification = new StateNotification(this);
     this.plusCharger = new PlusCharger(this, (amount: number) => { this.state.sphereCharge$.increase(amount) });
     this.minusCharger = new MinusCharger(this, (amount: number) => { this.state.sphereCharge$.increase(-amount) });
 
@@ -64,7 +64,7 @@ export default class GameController extends Phaser.Scene {
         (time: number) => this.charge.stun(TimeToDiscrete(time, 750) * 1000),
       ),
       new Button2(this, 'Wind', start.x + 250, buttonY,
-        (time: number) => this.charge.wind(TimeToDiscrete(time, 150)),
+        (time: number) => this.base.showWind(time),
       ),
       new Button2(this, 'Send -', start.x + 350, buttonY,
         (time: number) => this.sendMinusCharge(TimeToDiscrete(time, 500)),
